@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unique Path and Shareable Resume</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Unique Path and Shareable Resume</h1>
+      <form id="resume-form">
+        
+        <fieldset>
+          <legend>Personal Info</legend>
+          <label for="name">Name:</label>
+          <input type="text" id="name" required />
+          <label for="email">Email:</label>
+          <input type="email" id="email" required />
+        </fieldset>
+
+       
+        <fieldset>
+          <legend>Education</legend>
+          <label for="degree">Degree:</label>
+          <input type="text" id="degree" required />
+          <label for="school">School/College/University:</label>
+          <input type="text" id="school" required />
+          <label for="gradYear">Year:</label>
+          <input type="number" id="gradYear" required />
+        </fieldset>
+
+        
+        <fieldset>
+          <legend>Work Experience</legend>
+          <label for="jobTitle">Job Title:</label>
+          <input type="text" id="jobTitle" required />
+          <label for="company">Company:</label>
+          <input type="text" id="company" required />
+          <label for="years">Years of Experience:</label>
+          <input type="number" id="years" required />
+        </fieldset>
+
+        
+        <fieldset>
+          <legend>Skills</legend>
+          <label for="skills">Skills</label>
+          <input type="text" id="skills" required />
+        </fieldset>
+
+        <button type="submit">Generate Resume</button>
+      </form>
+
+      <hr />
+
+      
+      <div id="resume">
+        <div id="resume-content"></div>
+      </div>
+
+      
+      <div id="share-section">
+        <button id="copy-link-btn">Copy Shareable Link</button>
+        <a id="shareable-link" href="#" target="_blank" style="display: none"
+          >View Shareable Resume</a
+        >
+        <button id="download-btn">Download PDF</button>
+      </div>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+      <script src="index.js" defer></script>
+    </div>
+  </body>
+</html>

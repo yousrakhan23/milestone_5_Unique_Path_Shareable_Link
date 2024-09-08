@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume Viewer</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Your Resume</h1>
+      <div id="resume-content"></div>
+      <button id="download-btn">Download PDF</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const userName = urlParams.get("username");
+        const resumeData = JSON.parse(localStorage.getItem(userName));
+
+        if (resumeData) {
+          const resumeContent = document.getElementById("resume-content");
+          resumeContent.innerHTML = `
+            <h3>${resumeData.name}</h3>
+            <p>Email: ${resumeData.email}</p>
+            <h4>Education</h4>
+            <p>${resumeData.degree} from ${resumeData.school} (Class of ${
+            resumeData.gradYear
+          })</p>
+            <h4>Work Experience</h4>
+            <p>${resumeData.jobTitle} at ${resumeData.company} (${
+            resumeData.years
+          } years)</p>
+            <h4>Skills</h4>
+            <ul>
+              ${resumeData.skills.map((skill) => `<li>${skill}</li>`).join("")}
+            </ul>
+          `;
+        } else {
+          document.getElementById("resume-content").innerHTML =
+            "<p>Resume not found.</p>";
+        }
+
+        document
+          .getElementById("download-btn")
+          .addEventListener("click", function () {
+            const resumeElement = document.getElementById("resume-content");
+            const opt = {
+              margin: 1,
+              filename: "Resume.pdf",
+              image: { type: "jpeg", quality: 0.98 },
+              html2canvas: { scale: 2 },
+              jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+            };
+            html2pdf().from(resumeElement).set(opt).save();
+          });
+      });
+    </script>
+  </body>
+</html>
